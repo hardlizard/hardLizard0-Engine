@@ -10,9 +10,9 @@ import (
 
 /////////////////////Globals//////////////////////////////////
 const windowTitle = "goAA"
-const scale = 4
-const windowHeight = 256
-const windowWidth = 224
+const scale = 1
+const windowWidth = 1024
+const windowHeight = 768
 
 var gameMode = 0
 var mc sprite
@@ -49,16 +49,16 @@ func update(screen *ebiten.Image) error {
 func (s *sprite) movement() {
 	//wasd controls
 	if ebiten.IsKeyPressed(ebiten.KeyD) {
-		s.posX = s.posX + .5
+		s.posX = s.posX + 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		s.posX = s.posX - .5
+		s.posX = s.posX - 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyS) {
-		s.posY = s.posY + .5
+		s.posY = s.posY + 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyW) {
-		s.posY = s.posY - .5
+		s.posY = s.posY - 1
 	}
 }
 
@@ -76,7 +76,7 @@ func main() {
 
 func initAssets() {
 	var err error
-	mc.img, _, err = ebitenutil.NewImageFromFile("assets/white.png", ebiten.FilterDefault)
+	mc.img, _, err = ebitenutil.NewImageFromFile("gopherTop.png", ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
