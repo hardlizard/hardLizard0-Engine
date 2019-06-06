@@ -4,21 +4,21 @@ goActionAdventure is a prototype for an action adventure game written in golang 
 
 ### Todo
 
+- [ ] Load new world
+- [ ] Chunk Loading
+- [ ] Tiled map output file handleing
+- [ ] Connected Maps
+- [ ] HUD
+- [ ] Camera Motion
 - [x] Sprite Movement
 - [ ] Item/Object Holding
 - [ ] Sprite Animation
 - [ ] Enemies
 - [ ] Bosses
 - [ ] Health
-- [ ] HUD
 - [ ] Enemy AI
 - [ ] Map Loading
 - [ ] Animated Tiles
-- [ ] Chunk Loading
-- [ ] Connected Maps
-- [ ] Load new world
-- [ ] Camera Motion
-- [ ] Tiled map output file handleing
 - [ ] Art Assets
 - [ ] User Items
 - [ ] Non map objects
