@@ -5,16 +5,38 @@ goActionAdventure is a prototype for an action adventure game written in golang 
 ### Todo
 
 #### Alpha
-- [ ] Map Engine (world/map/chunk loading, etc.)
-- [ ] Camera and Sprites
-- [ ] Actors (players, enimes, AI)
-- [ ] Inventories (player inventories, chests, drops, etc.)
-- [ ] Animation Engine (Tile, Sprite, etc.)
-- [ ] HUD
-- [ ] TODO List
+* Map Engine
+    - [x] JSON Map Loader
+    - [ ] Chunk Renderer
+    - [ ] Tile Loading
+* Camera
+    - [ ] Follow Player Sprite
+    - [ ] Scroll on screen boundary
+    - [ ] Move To New Room/Chunk
+    - [x] Render Screen
+* Sprites
+    - [ ] Actors (PC/NPC)
+    - [ ] Movement
+    - [ ] Enemy AI
+    - [ ] Player Inventory
+* Animation Engine
+    - [ ] Tiles
+    - [ ] Sprites
+    - [ ] Items
 #### Beta
-- [ ] Health
-- [ ] Art Assets
+* HUD
+    - [ ] Health
+    - [ ] Currency
+    - [ ] Menus
+
+* Player Character Features 
+    - [ ] Health
+    - [ ] Item Holding
+* Art Assets
+    - [ ] Sprites
+    - [ ] Tiles 
+    - [ ] Maps
 #### Release
-- [ ] Randomizer
-- [ ] Timer
+* Features
+    - [ ] Randomizer
+    - [ ] Timer
