@@ -2,6 +2,8 @@
 
 goActionAdventure is a prototype for an action adventure game written in golang using hajimehoshi/ebiten as a backend. Once working, the codebase is intended to be reworked into a generic 2d tile engine.
 
+To run, execute `go run *.go` in the source directory.
+
 ### Todo
 
 #### Alpha
