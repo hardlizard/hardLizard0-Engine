@@ -18,7 +18,8 @@ To run, execute `go run *.go` in the source directory.
     - [x] Render Screen
 * Sprites
     - [ ] Actors (PC/NPC)
-    - [ ] Movement
+    - [x] Player Movement
+    - [ ] Collisions
     - [ ] Enemy AI
     - [ ] Player Inventory
 * Animation Engine
