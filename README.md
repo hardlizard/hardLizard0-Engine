@@ -5,8 +5,9 @@ goActionAdventure is a prototype for an action adventure game written in golang 
 ### Todo
 
 - [ ] Load new world
+- [ ] Map Loading
 - [ ] Chunk Loading
-- [ ] Tiled map output file handleing
+- [ ] Tiled map output file handling
 - [ ] Connected Maps
 - [ ] HUD
 - [ ] Camera Motion
@@ -17,7 +18,6 @@ goActionAdventure is a prototype for an action adventure game written in golang 
 - [ ] Bosses
 - [ ] Health
 - [ ] Enemy AI
-- [ ] Map Loading
 - [ ] Animated Tiles
 - [ ] Art Assets
 - [ ] User Items
@@ -25,4 +25,4 @@ goActionAdventure is a prototype for an action adventure game written in golang 
 - [ ] Persistence of chests
 - [ ] Randomizer
 - [ ] Timer
-- [ ] Todo List
+- [ ] TODO List
