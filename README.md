@@ -16,7 +16,8 @@ goActionAdventure is a prototype for an action adventure game written in golang 
     - [x] Render Screen
 * Sprites
     - [ ] Actors (PC/NPC)
-    - [ ] Movement
+    - [x] Player Movement
+    - [ ] Collisions
     - [ ] Enemy AI
     - [ ] Player Inventory
 * Animation Engine
