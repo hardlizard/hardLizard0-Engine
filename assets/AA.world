@@ -1,0 +1,15 @@
+{
+    "maps": [
+        {
+            "fileName": "001-1.json",
+            "x": 0,
+            "y": 0
+        },
+         {
+            "fileName": "002-1.json",
+            "x": 0,
+            "y": 640
+        }
+    ],
+    "type": "world"
+}
