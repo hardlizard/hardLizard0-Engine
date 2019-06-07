@@ -80,4 +80,42 @@ func (state *gameState) loadLayers() error {
 
 	return nil
 }
+
+
+//loadAtlas loads pngs of tiles into the atlas
+func (state *gameState) loadAtlas() error {
+	var err error
+	state.atlas.VRAM = make([]*ebiten.Image, 0, 0)
+
+	return err
+}
+
+
+//loadTileSet loads a tileset into VRAM with a blank 0 tile of the dimensions of the first tileset.
+func (state *gameState) loadTileSet() error {
+	//initialize blank tile, index 0
+	err := state.loadBlankTile(0) //argument is the size of the tiles in the 0th tileset.
+	if err != nil {
+		return err
+	}
+	for i, set := range state.json.Tilesets {
+		for j, val := range set.Tiles {
+
+		}
+
+	}
+	return err
+}
+
+
+//loadBlankTile loads a blank tile of given dimensions into VRAM at the current end of the slice.
+func (state *gameState) loadBlankTile(i int) error {
+	tileWidth := state.json.Tilesets[i].Tilewidth
+	tileHeight := state.json.Tilesets[i].Tileheight
+	blank, err := ebiten.NewImage(tileWidth, tileHeight, ebiten.FilterDefault)
+	blank.Fill(color.RGBA{0, 0, 0, 0})
+	state.atlas.VRAM = append(state.atlas.VRAM, blank)
+	return nil
+}
+
 */
