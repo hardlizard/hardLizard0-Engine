@@ -52,7 +52,14 @@ func (state *gameState) initAssets() error {
 	return err
 }
 
-//loadLayers loads layers into a 2d slice from a 1d array in the JSON
+//loadAtlas loads pngs of tiles into the atlas
+//func (state *gameState) loadAtlas() error {
+//	numTiles := state.json.Tilesets.Tilesets.T
+//
+//	return nil
+//}
+
+//loadLayers loads layers into a 2d slice of TileIDs from a 1d array in the JSON
 func (state *gameState) loadLayers() error {
 	numLayers := len(state.json.Layers)
 	state.layers = make([]Layer, numLayers, numLayers)
@@ -79,10 +86,16 @@ type gameState struct {
 	gameMode  int
 	assetsDir string
 	layers    []Layer
-	atlas     []Tile
+	atlas     Atlas
 	player    Sprite
 	camera    Position
 	json      loader.WorldMap
+}
+
+//Atlas holds the tiles to be rendered based on layer data
+type Atlas struct {
+	VRAM  []*ebiten.Image
+	tiles []Tile
 }
 
 //Position holds the
@@ -91,14 +104,23 @@ type Position struct {
 	Y float32
 }
 
+//Layer holds layer data in a matrix of tile IDs.
 type Layer struct {
 	data [][]TileID
 }
 
+//Tile is the basic unit of the world map, they may be animated if bool is true.
 type Tile struct {
-	img  *ebiten.Image
-	size int
+	frames   []Frame
+	animated bool
+	size     int
 	//col  collision //collision geometry goes here
+}
+
+//Frame holds a pointer to one frame of animatinon and its duraiton
+type Frame struct {
+	img      *ebiten.Image
+	duraiton int //in ms
 }
 
 //initGameState initializes state so the game can load.
@@ -109,6 +131,7 @@ func (state *gameState) initGameState() error {
 	return err
 }
 
+//TileID is the ID of the tile as referenced in the Layer data
 type TileID int
 
 func main() {
