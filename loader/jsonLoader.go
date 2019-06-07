@@ -1,13 +1,12 @@
-package main
+package loader
 
 import (
 	"encoding/json"
 	"os"
 )
 
-//Tile Engine
-
-func loadWorldMap(file string) (WorldMap, error) {
+//loadWorldMap imports a world map from a json file. In this case, made with Tiled.
+func LoadWorldMap(file string) (WorldMap, error) {
 	var world WorldMap
 	openFile, err := os.Open(file)
 	defer openFile.Close()
