@@ -1,4 +1,4 @@
-package loader
+package jsonLoader
 
 ////////////////////////////
 //file.world related structs

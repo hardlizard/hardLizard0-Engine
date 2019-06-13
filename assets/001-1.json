@@ -16,10 +16,10 @@
         {
          "draworder":"topdown",
          "id":7,
-         "name":"Sprites",
+         "name":"Player",
          "objects":[
                 {
-                 "gid":6,
+                 "gid":5,
                  "height":64,
                  "id":1,
                  "name":"Player",
@@ -48,7 +48,7 @@
          "source":"TestTileset.json"
         }, 
         {
-         "firstgid":6,
+         "firstgid":5,
          "source":"sprites.json"
         }],
  "tilewidth":32,

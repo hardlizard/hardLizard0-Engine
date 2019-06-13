@@ -7,7 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/ebitenutil"
 	"log"
 )
-import "github.com/jfemory/goActionAdventure/loader"
+import "github.com/jfemory/goActionAdventure/jsonLoader"
 
 func (state *gameState) initAssets() error {
 	var err error
@@ -18,12 +18,12 @@ func (state *gameState) initAssets() error {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	state.player.posX = windowWidth / 2
-	state.player.posY = windowHeight / 2
+	//TODO: Brittle code, replace w/ spawnpoint function
+	state.player.pos.X = windowWidth / 2
+	state.player.pos.Y = windowHeight / 2
 	//////////////////
 	//New world load code
-	state.worldJSON, err = loader.LoadWorld("assets/AA.world")
+	state.worldJSON, err = jsonLoader.LoadWorld("assets/AA.world")
 	if err != nil {
 		return err
 	}
@@ -35,6 +35,15 @@ func (state *gameState) initAssets() error {
 
 }
 
+//TODO: Move state.assetsDir to a env var or global.
+//initGameState initializes state so the game can load.
+func (state *gameState) initGameState() error {
+	var err error
+	state.gameMode = 0
+	state.assetsDir = "assets/"
+	return err
+}
+
 //loadMaps takes a gamestate and loads the maps associated with its world.
 func (state *gameState) loadMaps() error {
 	var err error
@@ -42,46 +51,53 @@ func (state *gameState) loadMaps() error {
 	for _, maps := range state.worldJSON.Maps {
 		file := state.assetsDir + maps.FileName
 		var newMap Map
-		newMap.mapJSON, err = loader.LoadMap(file)
-		newMap.offset = Offset{maps.X, maps.Y}
-		fmt.Println(maps.X)
-		fmt.Println(newMap)
-		fmt.Println(err)
+		newMap.mapJSON, err = jsonLoader.LoadMap(file)
+		newMap.size = Offset{maps.X, maps.Y}
 		if err != nil {
 			return err
 		}
 		state.maps = append(state.maps, newMap)
-		fmt.Println(state.maps)
-		fmt.Println()
+		if state.maps[0].loadLayers() != nil {
+			log.Fatal("Failed to load map")
+		}
+
 	}
+	//fmt.Println(state.maps)
+	//fmt.Println(state.maps[0])
 	return err
 }
 
-/*
 //loadLayers loads layers into a 2d slice of TileIDs from a 1d array in the JSON
-func (state *gameState) loadLayers() error {
-	numLayers := len(state.json.Layers)
-	state.layers = make([]Layer, numLayers, numLayers)
-	for i, val := range state.json.Layers {
-		width := state.json.Layers[i].Width
-		height := state.json.Layers[i].Height
-		state.layers[i].data = make([][]TileID, width, width)
-		for j := 0; j < width; j++ {
-			state.layers[i].data[j] = make([]TileID, height, height)
-		}
-		for j := 0; j < width; j++ {
-			for k := 0; k < height; k++ {
-				index := (j * width) + k
-				state.layers[i].data[j][k] = TileID(val.Data[index])
-			}
-		}
-		fmt.Println(state.layers[i].data)
-	}
+func (Map *Map) loadLayers() error {
+	Map.size.X = Map.mapJSON.Width
+	Map.size.Y = Map.mapJSON.Height
+	length := len(Map.mapJSON.Layers)
+	Map.layers = make([]Layer, length, length)
+	for i, val := range Map.mapJSON.Layers {
 
+		//TODO: Change to switch statement
+		if Map.mapJSON.Type == "tilelayer" {
+			Map.layers[i] = &TileLayer{}
+		}
+		if Map.mapJSON.Type == "objectgroup" {
+			Map.layers[i] = &ObjLayer{}
+		}
+		Map.layers[i].makeLayer(val)
+		fmt.Println(Map.layers)
+
+	}
 	return nil
 }
 
+func (layer *ObjLayer) makeLayer(val jsonLoader.Layers) error {
+	return nil
+}
 
+func (layer *TileLayer) makeLayer(data jsonLoader.Layers) error {
+	return nil
+}
+
+/*
 //loadAtlas loads pngs of tiles into the atlas
 func (state *gameState) loadAtlas() error {
 	var err error
@@ -98,7 +114,7 @@ func (state *gameState) loadTileSet() error {
 	if err != nil {
 		return err
 	}
-	for i, set := range state.json.Tilesets {
+	for i, set := range state.tileSetJSON.Tileset {
 		for j, val := range set.Tiles {
 
 		}
@@ -106,7 +122,6 @@ func (state *gameState) loadTileSet() error {
 	}
 	return err
 }
-
 
 //loadBlankTile loads a blank tile of given dimensions into VRAM at the current end of the slice.
 func (state *gameState) loadBlankTile(i int) error {
@@ -117,5 +132,4 @@ func (state *gameState) loadBlankTile(i int) error {
 	state.atlas.VRAM = append(state.atlas.VRAM, blank)
 	return nil
 }
-
 */

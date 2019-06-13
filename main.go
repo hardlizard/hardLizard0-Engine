@@ -33,6 +33,7 @@ func (state *gameState) update(screen *ebiten.Image) error {
 	}
 	//Do stuff goes here
 	screen.Fill(color.RGBA{255, 0, 0, 255})
+	
 	state.player.movement()
 	state.drawSprite(screen)
 	return nil

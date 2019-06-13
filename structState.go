@@ -2,52 +2,26 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten"
-	"github.com/jfemory/goActionAdventure/loader"
+	"github.com/jfemory/goActionAdventure/jsonLoader"
 )
 
 type gameState struct {
 	worldName string
 	gameMode  int
 	assetsDir string
-	player    Sprite
+	player    Entity
 	maps      []Map
 	atlas     Atlas
-	camera    Position
+	camera    Vec
 	// raw JSON information
-	worldJSON loader.World
-
-	tileSetJSON loader.TileSet
-}
-
-//Map holds map file data
-type Map struct {
-	offset  Offset
-	layers  []Layer
-	mapJSON loader.Map
+	worldJSON   jsonLoader.World   //world map raw data, use only on first load.
+	tileSetJSON jsonLoader.TileSet //json tileset info, use on first load to build tiles in atlas.
 }
 
 //Atlas holds the tiles to be rendered based on layer data
 type Atlas struct {
-	VRAM  []*ebiten.Image
-	tiles []Tile
-}
-
-//Offset holds an offset in pixels
-type Offset struct {
-	X int
-	Y int
-}
-
-//Position holds the
-type Position struct {
-	X float32
-	Y float32
-}
-
-/////////////Rework////////////
-//Layer holds layer data in a matrix of tile IDs.
-type Layer struct {
-	data [][]TileID
+	VRAM  []*ebiten.Image //The ebiten images used to render tiles
+	tiles []Tile          //Tile information, useful for dynamic tile loading
 }
 
 //Tile is the basic unit of the world map, they may be animated if bool is true.
@@ -64,13 +38,14 @@ type Frame struct {
 	duraiton int //in ms
 }
 
-//initGameState initializes state so the game can load.
-func (state *gameState) initGameState() error {
-	var err error
-	state.gameMode = 0
-	state.assetsDir = "assets/"
-	return err
+//Offset holds an offset in pixels.
+type Offset struct {
+	X int
+	Y int
 }
 
-//TileID is the ID of the tile as referenced in the Layer data
-type TileID int
+//Position holds the absolute screen position in a float.
+type Vec struct {
+	X float64
+	Y float64
+}
