@@ -7,30 +7,34 @@ import (
 
 //Map holds map file data
 type Map struct {
-	size    Offset         //Global map offset
-	layers  []Layer        //Layer data, matrices of TileIDs
-	mapJSON jsonLoader.Map //Raw JSON, use only of first load
-}
-
-//Layer interface holds layers of tiles or layers of sprites.
-type Layer interface {
-	makeLayer(jsonLoader.Layers) error
+	size       Offset //Global map offset
+	tileLayers []TileLayer
+	objLayers  []ObjLayer
+	entLayers  []EntLayer
+	mapJSON    jsonLoader.Map //Raw JSON, use only of first load
 }
 
 //ObjLayer holds sprite layer data
 type ObjLayer struct {
 	name string
-	id   int
-	data []Entity
-	size Offset
+	objs []Object
+}
+
+type EntLayer struct {
+	name     string
+	entities []Entity
+}
+
+type Object struct {
 }
 
 //TileLayer holds layer data in a matrix of tile IDs.
 type TileLayer struct {
-	name string
-	id   int
-	data [][]TileID //The numerical ID of a tile's index in the atlas
-	size Offset
+	name     string
+	data     [][]TileID //The numerical ID of a tile's index in the atlas
+	size     Offset
+	tileSize Offset
+	//size Offset
 }
 
 //TileID is the ID of the tile as referenced in the Layer data

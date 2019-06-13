@@ -2,7 +2,7 @@ package main
 
 import (
 	//	"encoding/json"
-	//"fmt"
+	"fmt"
 	"github.com/hajimehoshi/ebiten"
 	//"github.com/hajimehoshi/ebiten/ebitenutil"
 	"image/color"
@@ -33,8 +33,10 @@ func (state *gameState) update(screen *ebiten.Image) error {
 	}
 	//Do stuff goes here
 	screen.Fill(color.RGBA{255, 0, 0, 255})
-	
+
+	globalCount(state)
 	state.player.movement()
+	renderHelper(state, screen)
 	state.drawSprite(screen)
 	return nil
 }
@@ -47,5 +49,12 @@ func main() {
 	}
 	if err := ebiten.Run(state.update, windowWidth, windowHeight, scale, windowTitle); err != nil {
 		log.Fatal(err)
+	}
+}
+
+func globalCount(state *gameState) {
+	if state.globalCounter < 0xffffffffffffffff {
+		state.globalCounter++
+		fmt.Println(state.globalCounter)
 	}
 }

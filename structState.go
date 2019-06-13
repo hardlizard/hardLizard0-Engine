@@ -6,16 +6,17 @@ import (
 )
 
 type gameState struct {
-	worldName string
-	gameMode  int
-	assetsDir string
-	player    Entity
-	maps      []Map
-	atlas     Atlas
-	camera    Vec
+	worldName     string
+	gameMode      int
+	assetsDir     string
+	player        Entity
+	maps          []Map
+	atlas         Atlas
+	camera        Vec
+	globalCounter uint
 	// raw JSON information
-	worldJSON   jsonLoader.World   //world map raw data, use only on first load.
-	tileSetJSON jsonLoader.TileSet //json tileset info, use on first load to build tiles in atlas.
+	worldJSON   jsonLoader.World     //world map raw data, use only on first load.
+	tileSetJSON []jsonLoader.TileSet //json tileset info, use on first load to build tiles in atlas.
 }
 
 //Atlas holds the tiles to be rendered based on layer data

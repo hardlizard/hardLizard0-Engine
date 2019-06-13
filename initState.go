@@ -51,19 +51,20 @@ func (state *gameState) loadMaps() error {
 	for _, maps := range state.worldJSON.Maps {
 		file := state.assetsDir + maps.FileName
 		var newMap Map
+
 		newMap.mapJSON, err = jsonLoader.LoadMap(file)
 		newMap.size = Offset{maps.X, maps.Y}
 		if err != nil {
 			return err
 		}
 		state.maps = append(state.maps, newMap)
-		if state.maps[0].loadLayers() != nil {
-			log.Fatal("Failed to load map")
-		}
 
 	}
+	if state.maps[0].loadLayers() != nil {
+		return err
+	}
 	//fmt.Println(state.maps)
-	//fmt.Println(state.maps[0])
+	//fmt.Println(state.maps[1])
 	return err
 }
 
@@ -71,29 +72,44 @@ func (state *gameState) loadMaps() error {
 func (Map *Map) loadLayers() error {
 	Map.size.X = Map.mapJSON.Width
 	Map.size.Y = Map.mapJSON.Height
-	length := len(Map.mapJSON.Layers)
-	Map.layers = make([]Layer, length, length)
-	for i, val := range Map.mapJSON.Layers {
-
+	//init counters for layers
+	for _, val := range Map.mapJSON.Layers {
 		//TODO: Change to switch statement
-		if Map.mapJSON.Type == "tilelayer" {
-			Map.layers[i] = &TileLayer{}
+		if val.Type == "tilelayer" {
+			makeTileLayer(val, Map)
+			fmt.Println("make tilemap called")
 		}
-		if Map.mapJSON.Type == "objectgroup" {
-			Map.layers[i] = &ObjLayer{}
+		if val.Type == "objectgroup" {
+			makeObjLayer(val, Map)
 		}
-		Map.layers[i].makeLayer(val)
-		fmt.Println(Map.layers)
-
 	}
 	return nil
 }
 
-func (layer *ObjLayer) makeLayer(val jsonLoader.Layers) error {
+func makeEntityLayer(val jsonLoader.Layers, Map *Map) error {
+	Map.entLayers = append(Map.entLayers, EntLayer{val.Name, nil})
 	return nil
 }
 
-func (layer *TileLayer) makeLayer(data jsonLoader.Layers) error {
+func makeObjLayer(val jsonLoader.Layers, Map *Map) error {
+	//spin up layer
+	fmt.Println("obj")
+	Map.objLayers = append(Map.objLayers, ObjLayer{})
+	return nil
+}
+
+func makeTileLayer(val jsonLoader.Layers, Map *Map) error {
+	//spin up layer
+	tileMatrix := make([][]TileID, Map.size.X)
+	i := 0 //i is the index of the tile array fromt the raw JSON data.
+	for x := 0; x < Map.size.X; x++ {
+		tileMatrix[x] = make([]TileID, Map.size.Y)
+		for y := 0; y < Map.size.Y; y++ {
+			tileMatrix[x][y] = TileID(val.Data[i])
+			i++
+		}
+	}
+	Map.tileLayers = append(Map.tileLayers, TileLayer{val.Name, tileMatrix, Map.size, Offset{32, 32}}) //TODO: Change hardcoded values to tilesize
 	return nil
 }
 
@@ -106,15 +122,11 @@ func (state *gameState) loadAtlas() error {
 	return err
 }
 
-
 //loadTileSet loads a tileset into VRAM with a blank 0 tile of the dimensions of the first tileset.
 func (state *gameState) loadTileSet() error {
 	//initialize blank tile, index 0
-	err := state.loadBlankTile(0) //argument is the size of the tiles in the 0th tileset.
-	if err != nil {
-		return err
-	}
-	for i, set := range state.tileSetJSON.Tileset {
+
+	for i, set := range state.tileSetJSON.{
 		for j, val := range set.Tiles {
 
 		}
@@ -123,6 +135,7 @@ func (state *gameState) loadTileSet() error {
 	return err
 }
 
+/*
 //loadBlankTile loads a blank tile of given dimensions into VRAM at the current end of the slice.
 func (state *gameState) loadBlankTile(i int) error {
 	tileWidth := state.json.Tilesets[i].Tilewidth

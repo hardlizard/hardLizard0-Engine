@@ -7,8 +7,8 @@ import (
 type Entity struct {
 	pos Vec
 	//velocity vec     //Use this if you need velocity
-	height int //height, used to determine collisions on multiheight maps
-	img    *ebiten.Image
+	//height int //height, used to determine collisions on multiheight maps
+	img *ebiten.Image
 	//items
 	//hold
 }
