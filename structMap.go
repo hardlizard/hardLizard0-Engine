@@ -3,6 +3,7 @@ package main
 import (
 	//"github.com/hajimehoshi/ebiten"
 	"github.com/jfemory/goActionAdventure/jsonLoader"
+	obj "github.com/jfemory/goActionAdventure/object"
 )
 
 //Map holds map file data
@@ -22,7 +23,7 @@ type ObjLayer struct {
 
 type EntLayer struct {
 	name     string
-	entities []Entity
+	entities []obj.Entity
 }
 
 type Object struct {

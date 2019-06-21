@@ -3,13 +3,14 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten"
 	"github.com/jfemory/goActionAdventure/jsonLoader"
+	obj "github.com/jfemory/goActionAdventure/object"
 )
 
 type gameState struct {
 	worldName     string
 	gameMode      int
 	assetsDir     string
-	player        Entity
+	player        obj.Player
 	maps          []Map
 	atlas         Atlas
 	camera        Vec

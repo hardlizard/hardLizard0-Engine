@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten"
 	//"github.com/hajimehoshi/ebiten/ebitenutil"
+	obj "github.com/jfemory/goActionAdventure/object"
 	"image/color"
 	"log"
 )
@@ -35,7 +36,7 @@ func (state *gameState) update(screen *ebiten.Image) error {
 	screen.Fill(color.RGBA{255, 0, 0, 255})
 
 	globalCount(state)
-	state.player.movement()
+	state.player.mover()
 	renderHelper(state, screen)
 	state.drawSprite(screen)
 	return nil
