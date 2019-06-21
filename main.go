@@ -1,11 +1,12 @@
 package main
 
 import (
+	//"gonum.org/v1/gonum/stat"
 	//	"encoding/json"
 	//"fmt"
 	"github.com/hajimehoshi/ebiten"
 	//"github.com/hajimehoshi/ebiten/ebitenutil"
-	//obj "github.com/jfemory/goActionAdventure/object"
+	// "github.com/jfemory/goActionAdventure/obj"
 	"image/color"
 	"log"
 )
@@ -36,10 +37,9 @@ func (state *gameState) update(screen *ebiten.Image) error {
 	screen.Fill(color.RGBA{255, 0, 0, 255})
 
 	globalCount(state)
-	state.player.Entity.Mover()
+	state.player.Mover()
 	renderHelper(state, screen)
 	state.drawSprite(screen)
-	state.player.Entity.Thing.ImgSetter("assets", "gopherTop.png")
 	return nil
 }
 

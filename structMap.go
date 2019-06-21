@@ -3,7 +3,7 @@ package main
 import (
 	//"github.com/hajimehoshi/ebiten"
 	"github.com/jfemory/goActionAdventure/jsonLoader"
-	obj "github.com/jfemory/goActionAdventure/object"
+	"github.com/jfemory/goActionAdventure/obj"
 )
 
 //Map holds map file data

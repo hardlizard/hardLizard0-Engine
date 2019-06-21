@@ -20,6 +20,7 @@ func (state *gameState) initAssets() error {
 	if err != nil {
 		log.Fatal(err)
 	}
+	state.player.Entity.Thing.MovSpd.X, state.player.Entity.Thing.MovSpd.Y = 1.0, 1.0
 	//TODO: Brittle code, replace w/ spawnpoint function
 	state.player.Entity.Thing.Pos.X = windowWidth / 2
 	state.player.Entity.Thing.Pos.Y = windowHeight / 2
