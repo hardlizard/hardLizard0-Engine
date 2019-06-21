@@ -14,7 +14,7 @@ func (layer TileLayer) drawLayer(screen *ebiten.Image, state *gameState) error {
 			localOffset := int(state.globalCounter / 3 % 5)
 			opts := &ebiten.DrawImageOptions{}
 			opts.GeoM.Translate(float64(x*layer.tileSize.X+localOffset), float64(y*layer.tileSize.Y))
-			screen.DrawImage(state.player.img, opts)
+			screen.DrawImage(state.player.Entity.Thing.Img, opts)
 		}
 	}
 	return nil
@@ -22,6 +22,6 @@ func (layer TileLayer) drawLayer(screen *ebiten.Image, state *gameState) error {
 
 func (state *gameState) drawSprite(screen *ebiten.Image) {
 	opts := &ebiten.DrawImageOptions{}
-	opts.GeoM.Translate(state.player.pos.X, state.player.pos.Y)
-	screen.DrawImage(state.player.img, opts)
+	opts.GeoM.Translate(state.player.Entity.Thing.Pos.X, state.player.Entity.Thing.Pos.Y)
+	screen.DrawImage(state.player.Entity.Thing.Img, opts)
 }

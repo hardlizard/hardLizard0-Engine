@@ -2,10 +2,10 @@ package main
 
 import (
 	//	"encoding/json"
-	"fmt"
+	//"fmt"
 	"github.com/hajimehoshi/ebiten"
 	//"github.com/hajimehoshi/ebiten/ebitenutil"
-	obj "github.com/jfemory/goActionAdventure/object"
+	//obj "github.com/jfemory/goActionAdventure/object"
 	"image/color"
 	"log"
 )
@@ -36,9 +36,10 @@ func (state *gameState) update(screen *ebiten.Image) error {
 	screen.Fill(color.RGBA{255, 0, 0, 255})
 
 	globalCount(state)
-	state.player.mover()
+	state.player.Entity.Mover()
 	renderHelper(state, screen)
 	state.drawSprite(screen)
+	state.player.Entity.Thing.ImgSetter("assets", "gopherTop.png")
 	return nil
 }
 
@@ -56,6 +57,6 @@ func main() {
 func globalCount(state *gameState) {
 	if state.globalCounter < 0xffffffffffffffff {
 		state.globalCounter++
-		fmt.Println(state.globalCounter)
+		//fmt.Println(state.globalCounter)
 	}
 }

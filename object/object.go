@@ -1,15 +1,23 @@
 package object
 
 import (
+	"fmt"
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/ebitenutil"
+	"strings"
 )
 
 type mover interface {
 	Mover()
 }
 
+type imgSetter interface {
+	ImgSetter()
+}
+
 //Thing is a top level non tile object.
 type Thing struct {
+	Img *ebiten.Image
 	Pos vec
 }
 
@@ -43,20 +51,41 @@ type isPressed struct {
 	sel   bool
 }
 
+//ImgSetter sets an ebiten image in a Thing.
+func (t *Thing) ImgSetter(folder, filename string) error {
+	path := strings.Join([]string{folder, "/", filename}, "")
+	fmt.Println(path)
+	img, _, err := ebitenutil.NewImageFromFile(path, ebiten.FilterDefault)
+	t.Img = img
+	return err
+}
+
+//ImgSetter sets an ebiten Image in an Entity.
+func (e *Entity) ImgSetter(folder, filename string) error {
+	err := e.Thing.ImgSetter(folder, filename)
+	return err
+}
+
+//ImgSetter sets an ebiten Image in a Player.
+func (p *Player) ImgSetter(folder, filename string) error {
+	err := p.Entity.ImgSetter(folder, filename)
+	return err
+}
+
 //Mover takes an entity and updates its position.
-func (s *Entity) Mover() {
+func (e *Entity) Mover() {
 	//wasd controls
 	if ebiten.IsKeyPressed(ebiten.KeyS) {
-		s.Thing.Pos.Y = s.Thing.Pos.Y + 1
+		e.Thing.Pos.Y = e.Thing.Pos.Y + 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		s.Thing.Pos.X = s.Thing.Pos.X - 1
+		e.Thing.Pos.X = e.Thing.Pos.X - 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyD) {
-		s.Thing.Pos.X = s.Thing.Pos.X + 1
+		e.Thing.Pos.X = e.Thing.Pos.X + 1
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyW) {
-		s.Thing.Pos.Y = s.Thing.Pos.Y - 1
+		e.Thing.Pos.Y = e.Thing.Pos.Y - 1
 	}
 }
 

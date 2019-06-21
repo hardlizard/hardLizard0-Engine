@@ -3,8 +3,8 @@ package main
 import (
 	//	"encoding/json"
 	"fmt"
-	"github.com/hajimehoshi/ebiten"
-	"github.com/hajimehoshi/ebiten/ebitenutil"
+	//"github.com/hajimehoshi/ebiten"
+	//"github.com/hajimehoshi/ebiten/ebitenutil"
 	//obj "github.com/jfemory/goActionAdventure/object"
 	"log"
 )
@@ -15,13 +15,14 @@ func (state *gameState) initAssets() error {
 	//Old Player position code
 	//TODO: refactor to spawn based on sprite layer
 
-	state.player.Img, _, err = ebitenutil.NewImageFromFile("assets/gopherTop.png", ebiten.FilterDefault)
+	//state.player.Entity.Thing.Img, _, err = ebitenutil.NewImageFromFile("assets/gopherTop.png", ebiten.FilterDefault)
+	state.player.ImgSetter("assets", "gopherTop.png")
 	if err != nil {
 		log.Fatal(err)
 	}
 	//TODO: Brittle code, replace w/ spawnpoint function
-	state.player.Pos.X = windowWidth / 2
-	state.player.Pos.Y = windowHeight / 2
+	state.player.Entity.Thing.Pos.X = windowWidth / 2
+	state.player.Entity.Thing.Pos.Y = windowHeight / 2
 	//////////////////
 	//New world load code
 	state.worldJSON, err = jsonLoader.LoadWorld("assets/AA.world")
