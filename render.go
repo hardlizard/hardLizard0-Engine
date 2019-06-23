@@ -4,10 +4,12 @@ import (
 	"github.com/hajimehoshi/ebiten"
 )
 
-func renderHelper(state *gameState, screen *ebiten.Image) {
-	state.maps[0].tileLayers[0].drawLayer(screen, state)
+/*
+func renderHelper(s *gameState, screen *ebiten.Image) {
+	s.maps[0].tileLayers[0].drawLayer(screen, state)
 }
 
+/*
 func (layer TileLayer) drawLayer(screen *ebiten.Image, state *gameState) error {
 	for x, columns := range layer.data {
 		for y, _ := range columns {
@@ -19,9 +21,10 @@ func (layer TileLayer) drawLayer(screen *ebiten.Image, state *gameState) error {
 	}
 	return nil
 }
+*/
 
-func (state *gameState) drawSprite(screen *ebiten.Image) {
+func drawSprite(s *gameState, screen *ebiten.Image) {
 	opts := &ebiten.DrawImageOptions{}
-	opts.GeoM.Translate(state.player.Entity.Thing.Pos.X, state.player.Entity.Thing.Pos.Y)
-	screen.DrawImage(state.player.Entity.Thing.Img, opts)
+	opts.GeoM.Translate(s.player.Entity.Thing.Pos.X, s.player.Entity.Thing.Pos.Y)
+	screen.DrawImage(s.player.Entity.Thing.Img, opts)
 }

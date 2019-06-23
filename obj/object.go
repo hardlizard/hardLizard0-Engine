@@ -1,42 +1,35 @@
 package obj
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
 	"strings"
 )
 
-type mover interface {
-	Mover()
-}
-
-type imgSetter interface {
-	ImgSetter()
-}
-
 //Thing is a top level non tile object.
 type Thing struct {
 	Img    *ebiten.Image
-	Pos    vec
-	MovSpd vec
+	Pos    Vec
+	MovSpd Vec //MovSpd sets a base movevemnt speed value for a Thing
 }
 
 //Entity is a Thing that has AI associated with it.
 type Entity struct {
 	Thing Thing
-	//velocity vec     //Use this if you need velocity
+	//velocity Vec     //Use this if you need velocity
 	//height int //height, used to determine collisions on multiheight maps
-	Img *ebiten.Image
 	//items
 	//hold
 }
 
+//Player is an Entity that is controllable by a human
 type Player struct {
 	Entity Entity
 	Button isPressed
 }
 
+//isPressed contains button state for the player. These are set with the Inputter method.
 type isPressed struct {
 	up    bool
 	down  bool
@@ -77,12 +70,20 @@ func (p *Player) Inputer() {
 	}
 }
 
+//ImgSetter methods
 //ImgSetter sets an ebiten image in a Thing.
 func (t *Thing) ImgSetter(folder, filename string) error {
 	path := strings.Join([]string{folder, "/", filename}, "")
+	fmt.Println(path)
 	img, _, err := ebitenutil.NewImageFromFile(path, ebiten.FilterDefault)
 	t.Img = img
 	return err
+}
+
+//NewPlayer creates a new player struct and returns a pointer.
+func NewPlayer() *Player {
+	var p Player
+	return &p
 }
 
 //ImgSetter sets an ebiten Image in an Entity.
@@ -97,11 +98,12 @@ func (p *Player) ImgSetter(folder, filename string) error {
 	return err
 }
 
+//Mover methods
 //Mover takes a Player and updates its position.
 func (p *Player) Mover() {
 	//wasd controls
 	p.Inputer()
-	var offset vec
+	var offset Vec // Player to be moved by the amount in offset.
 	if p.Button.up {
 		offset.Y = -1.0
 	}
@@ -118,19 +120,19 @@ func (p *Player) Mover() {
 }
 
 //Mover takes an Entity and updates its position.
-func (e *Entity) Mover(offset vec) {
+func (e *Entity) Mover(offset Vec) {
 	e.Thing.Mover(offset)
 }
 
 //Mover takes a thing and updates its position.
-func (t *Thing) Mover(offset vec) {
+func (t *Thing) Mover(offset Vec) {
 	t.Pos.X = t.Pos.X + offset.X*t.MovSpd.X
 	t.Pos.Y = t.Pos.Y + offset.Y*t.MovSpd.Y
 }
 
 //Extra types to make things work
 
-type vec struct {
+type Vec struct {
 	X float64
 	Y float64
 }

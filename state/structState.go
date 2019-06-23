@@ -1,23 +1,25 @@
-package main
+package state
 
 import (
 	"github.com/hajimehoshi/ebiten"
 	"github.com/jfemory/goActionAdventure/jsonLoader"
+	"github.com/jfemory/goActionAdventure/maps"
 	"github.com/jfemory/goActionAdventure/obj"
 )
 
-type gameState struct {
-	worldName     string
-	gameMode      int
-	assetsDir     string
-	player        obj.Player
-	maps          []Map
-	atlas         Atlas
-	camera        Vec
-	globalCounter uint
+type GameState struct {
+	WorldName     string
+	GameMode      int
+	AssetsDir     string
+	Player        obj.Player
+	Maps          []maps.Map
+	Atlas         Atlas
+	Camera        Vec
+	GlobalCounter uint
 	// raw JSON information
-	worldJSON   jsonLoader.World     //world map raw data, use only on first load.
-	tileSetJSON []jsonLoader.TileSet //json tileset info, use on first load to build tiles in atlas.
+	
+	TileSetJSON []jsonLoader.TileSet //json tileset info, use on first load to build tiles in atlas.
+	WindowDim   VecInt
 }
 
 //Atlas holds the tiles to be rendered based on layer data
@@ -40,14 +42,4 @@ type Frame struct {
 	duraiton int //in ms
 }
 
-//Offset holds an offset in pixels.
-type Offset struct {
-	X int
-	Y int
-}
 
-//Position holds the absolute screen position in a float.
-type Vec struct {
-	X float64
-	Y float64
-}

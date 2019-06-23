@@ -24,7 +24,7 @@ To run, execute `go run *.go` in the source directory.
     - [ ] Player Inventory
 * Animation Engine
     - [ ] Tiles
-    - [ ] Sprites
+    - [X] Sprites
     - [ ] Items
 #### Beta
 * HUD
