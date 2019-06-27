@@ -11,6 +11,7 @@ To run, execute `go run *.go` in the source directory.
     - [x] JSON Map Loader
     - [ ] Chunk Renderer
     - [ ] Tile Loading
+    - [ ] Use path library to open files
 * Camera
     - [ ] Follow Player Sprite
     - [ ] Scroll on screen boundary

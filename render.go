@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"github.com/hajimehoshi/ebiten"
 )
@@ -21,10 +22,11 @@ func (layer TileLayer) drawLayer(screen *ebiten.Image, state *gameState) error {
 	}
 	return nil
 }
-*/
+
 
 func drawSprite(s *gameState, screen *ebiten.Image) {
 	opts := &ebiten.DrawImageOptions{}
 	opts.GeoM.Translate(s.player.Entity.Thing.Pos.X, s.player.Entity.Thing.Pos.Y)
 	screen.DrawImage(s.player.Entity.Thing.Img, opts)
 }
+*/
