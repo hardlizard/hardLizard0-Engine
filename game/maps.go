@@ -13,12 +13,14 @@ type mapFile struct {
 }
 
 type localMap struct {
-	tileLayers []tileLayer
-	objLayers  []objLayer
-	width      int
-	height     int
-	tileHeight int
-	tileWidth  int
+	backgroundLayers []tileLayer
+	tileLayers       []tileLayer
+	objLayers        []objLayer
+	forgroundLayers  []tileLayer
+	width            int
+	height           int
+	tileHeight       int
+	tileWidth        int
 }
 
 type tileLayer struct {

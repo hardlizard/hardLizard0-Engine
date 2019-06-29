@@ -28,7 +28,7 @@ func NewWorld(folder string) (*World, error) {
 	}
 	w.folder = folder
 
-	w.oldMap.loadMap(w.folder, w.mapFiles[0].filename)
+	w.oldMap.loadMap(w.folderwq, w.mapFiles[0].filename)
 	fmt.Println(w.oldMap)
 	return &w, nil
 }

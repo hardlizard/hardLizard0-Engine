@@ -1,33 +1,31 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/hajimehoshi/ebiten"
-	//"github.com/hajimehoshi/ebiten/ebitenutil"
-	"github.com/jfemory/goActionAdventure/game"
-	//"github.com/jfemory/goActionAdventure/renderer"
 	"image/color"
 	"log"
 )
 
-/////////////////////Globals//////////////////////////////////
+//Globals
 const windowTitle = "goAA"
 const scale = 1
 const windowWidth = 1024
 const windowHeight = 768
-
-var w *game.World
-
 const assetsDir = "assets"
 
-//////////////////////////////////////////////////////////////
+//Components
+const maxEntity = 100    //the maximum number of entities we can handle
+var maxUsedEntity uint16 //Change value if more than 65536 entities.
+var freeList [maxEntity]bool
+
+//position holds positions, ordered x, y, as pairs of entries in the array
+var position [maxEntity * 2]float32
 
 //update is the main loop of the ebiten engine. Core loop is here.
 func update(screen *ebiten.Image) error {
 	//gameMode 0 initializes assets
-	if w.GetMode() == 0 {
-		w.SetMode(1)
-	}
+	//TODO: Insert game mode code.
 	if ebiten.IsDrawingSkipped() {
 		return nil
 	}
@@ -37,12 +35,6 @@ func update(screen *ebiten.Image) error {
 }
 
 func main() {
-	var err error
-	w, err = game.NewWorld("assets")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(w)
 	if err := ebiten.Run(update, windowWidth, windowHeight, scale, windowTitle); err != nil {
 		log.Fatal(err)
 
