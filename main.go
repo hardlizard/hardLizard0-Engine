@@ -1,7 +1,6 @@
 package main
 
 import (
-	//"fmt"
 	"github.com/hajimehoshi/ebiten"
 	"image/color"
 	"log"
@@ -26,6 +25,7 @@ func update(screen *ebiten.Image) error {
 	if gameMode == 0 {
 		initAssets()
 		initPlayer()
+		newEnemy()
 		gameMode = 1
 	}
 	if ebiten.IsDrawingSkipped() {

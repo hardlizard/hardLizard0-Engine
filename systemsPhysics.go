@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import ()
 
 //Physics Update systems.
 //updatePVA updates position and velocity arrays from the acceration array.
@@ -10,6 +8,7 @@ func updatePVA() {
 	updateVelocity()
 	updatePlayerVelocity()
 	updatePosition()
+	collision()
 }
 
 //updatePosition updates the posisition array from the velocity array
@@ -17,8 +16,6 @@ func updatePosition() {
 	for i := 0; i < maxUsedEntity+1; i++ {
 		position[2*i] += velocity[2*i]
 		position[2*i+1] += velocity[2*i+1]
-		fmt.Println(velocity[0])
-		fmt.Println(velocity[1])
 	}
 }
 
@@ -48,7 +45,6 @@ func updatePlayerVelocity() {
 	} else {
 		velocity[1] = 0
 	}
-	fmt.Println(currentInputState)
 }
 
 //sets are used to init PVA values.
@@ -65,4 +61,9 @@ func setVelocity(vx, vy float64, gid uint16) {
 func setAcceleration(ax, ay float64, gid uint16) {
 	acceleration[gid*2] = ax
 	acceleration[gid*2+1] = ay
+}
+
+func setHitbox(x, y int8, gid uint16) {
+	hitbox[gid*2] = x
+	hitbox[gid*2+1] = y
 }
