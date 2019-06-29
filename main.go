@@ -9,28 +9,36 @@ import (
 
 //Globals
 const windowTitle = "goAA"
-const scale = 1
-const windowWidth = 1024
-const windowHeight = 768
+const scale = 3
+const windowWidth = 480
+const windowHeight = 320
 const assetsDir = "assets"
 
-//Components
-const maxEntity = 100    //the maximum number of entities we can handle
-var maxUsedEntity uint16 //Change value if more than 65536 entities.
-var freeList [maxEntity]bool
+var gameMode = 0
+var currentInputState inputState
 
 //position holds positions, ordered x, y, as pairs of entries in the array
-var position [maxEntity * 2]float32
+//var position [maxEntity * 2]float32
 
 //update is the main loop of the ebiten engine. Core loop is here.
 func update(screen *ebiten.Image) error {
 	//gameMode 0 initializes assets
-	//TODO: Insert game mode code.
+	if gameMode == 0 {
+		initAssets()
+		initPlayer()
+		gameMode = 1
+	}
 	if ebiten.IsDrawingSkipped() {
 		return nil
 	}
 	//Do stuff goes here
+	//physics
+	updateInputState()
+	updatePVA()
+	//render
 	screen.Fill(color.RGBA{0, 128, 128, 255})
+	drawSprite(screen)
+	//ebitenutil.DebugPrint(screen, out)
 	return nil
 }
 
