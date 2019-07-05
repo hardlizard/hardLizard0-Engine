@@ -27,8 +27,8 @@
                  "type":"Sprite",
                  "visible":true,
                  "width":32,
-                 "x":544.176991150443,
-                 "y":314.300884955752
+                 "x":564.344744275256,
+                 "y":272.116506031047
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -37,7 +37,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":2,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",

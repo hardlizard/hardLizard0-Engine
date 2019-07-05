@@ -8,16 +8,18 @@ To run, execute `go run *.go` in the source directory.
 
 - Entities
   - [x] Player - Being user controllable mob
-  - [o] Mob - Being damageable and damaging NPC.
+  - [x] Mob - Being damageable and damaging NPC.
   - [ ] NPC - Being movable, interactable sprite.
   - [ ] Cursor - For use in menus.
   - [ ] Projectile - Moves using AI, damages on collision, despawns on collision.
   - [ ] Obj (No AI) - Boxes, Chests, Question Blocks, etc.
   - [ ] Items - Usable items that are held in inventory and selected for use.
   - [ ] Map - World Map, Dungeon, etc Maps.
+  - [x] Health
+  - [x] Death
 
 - Components
-  - [ ] Player Singleton - The player singleton will contain one off information for the player entity.
+  - [ ] Player Singleton - The player singleton will contain one off information for the player entity.  
   -[x] PVA
     - [x] Position
     - [x] Velocity
@@ -41,12 +43,15 @@ To run, execute `go run *.go` in the source directory.
   - [x] Update Velocity
   - [x] Update Acceleration
   - [ ] Update Z Position
-  - [o] AABB Collision Detection
+  - [ ] Circle Collision Detection
+    - [x] Detection
+    - [ ] Push
+    - [ ] Knockback
   - [ ] Tile Floor Collision
   - [ ] Tile Wall Collision
-  - [ ] Damage
+  - [x] Damage
   - [ ] Heal
-  - [ ] Knockback
+  - [x] Death
   - [ ] Render Loop
     - [ ] Render Map (On Grid Single Entity)
     - [x] Render Sprites (Off Grid Entities)

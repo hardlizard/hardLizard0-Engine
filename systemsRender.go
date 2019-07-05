@@ -9,7 +9,7 @@ import (
 func drawSprite(screen *ebiten.Image) {
 	for i := 0; i < maxUsedEntity+1; i++ {
 		opts := &ebiten.DrawImageOptions{}
-		opts.GeoM.Translate(position[i*2], position[i*2+1])
+		opts.GeoM.Translate(float64(position[i].x), float64(position[i].y))
 		screen.DrawImage(VRAM[i], opts)
 	}
 }

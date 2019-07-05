@@ -1,12 +1,15 @@
 package main
 
+import "fmt"
+
 func collision() {
 	for i := 1; i < maxUsedEntity+1; i++ {
-		if position[0] < position[i]+float64(hitbox[i]) &&
-			position[0]+float64(hitbox[0]) > position[i] &&
-			position[1] < position[i+1]+float64(hitbox[i+1]) &&
-			position[1]+float64(hitbox[1]) > position[i+1] {
-			velocity[0] = 0
+		dx := (hitbox[0].pos.x + position[0].x) - (hitbox[i].pos.x + position[i].x)
+		dy := (hitbox[0].pos.y + position[0].y) - (hitbox[i].pos.y + position[i].y)
+		radii := hitbox[0].size + hitbox[i].size
+		if (dx*dx)+(dy*dy) < (radii * radii) {
+			fmt.Println(health[0])
+			health[0]--
 		}
 	}
 }

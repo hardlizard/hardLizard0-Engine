@@ -22,12 +22,16 @@ var currentInputState inputState //TODO: Move to player singleton struct
 //update is the main loop of the ebiten engine. Core loop is here.
 func update(screen *ebiten.Image) error {
 	//gameMode 0 initializes assets
+	if gameMode == -1 {
+		panic("Game Over")
+	}
 	if gameMode == 0 {
 		initAssets()
 		initPlayer()
-		newEnemy()
+		newMob()
 		gameMode = 1
 	}
+
 	if ebiten.IsDrawingSkipped() {
 		return nil
 	}
@@ -38,6 +42,7 @@ func update(screen *ebiten.Image) error {
 	//render
 	screen.Fill(color.RGBA{0, 128, 128, 255})
 	drawSprite(screen)
+	death()
 	//ebitenutil.DebugPrint(screen, out)
 	return nil
 }

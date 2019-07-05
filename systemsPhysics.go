@@ -15,8 +15,8 @@ func updatePVA() {
 //updatePosition updates the posisition array from the velocity array
 func updatePosition() {
 	for i := 0; i < maxUsedEntity+1; i++ {
-		position[2*i] += velocity[2*i]
-		position[2*i+1] += velocity[2*i+1]
+		position[i].x += velocity[i].x
+		position[i].y += velocity[i].y
 	}
 }
 
@@ -24,8 +24,8 @@ func updatePosition() {
 func updateVelocity() {
 	for i := 0; i < maxUsedEntity+1; i++ {
 
-		velocity[2*i] += acceleration[2*i]
-		velocity[2*i+1] += acceleration[2*i+1]
+		velocity[i].x += acceleration[i].x
+		velocity[i].y += acceleration[i].y
 
 	}
 }
@@ -33,38 +33,40 @@ func updateVelocity() {
 //updatePlayerVelocity updates the player position based on current input
 func updatePlayerVelocity() {
 	if currentInputState.left == true {
-		velocity[0] = -1
+		velocity[0].x = -1
 	} else if currentInputState.right == true {
-		velocity[0] = 1
+		velocity[0].x = 1
 	} else {
-		velocity[0] = 0
+		velocity[0].x = 0
 	}
 	if currentInputState.up == true {
-		velocity[1] = -1
+		velocity[0].y = -1
 	} else if currentInputState.down == true {
-		velocity[1] = 1
+		velocity[0].y = 1
 	} else {
-		velocity[1] = 0
+		velocity[0].y = 0
 	}
 }
 
 //sets are used to init PVA values.
-func setPosition(x, y float64, gid uint16) {
-	position[gid*2] = x
-	position[gid*2+1] = y
+func setPosition(x, y float32, gid uint) {
+	position[gid].x = x
+	position[gid].y = y
 }
 
-func setVelocity(vx, vy float64, gid uint16) {
-	velocity[gid*2] = vx
-	velocity[gid*2+1] = vy
+func setVelocity(vx, vy float32, gid uint) {
+	velocity[gid].x = vx
+	velocity[gid].y = vy
 }
 
-func setAcceleration(ax, ay float64, gid uint16) {
-	acceleration[gid*2] = ax
-	acceleration[gid*2+1] = ay
+func setAcceleration(ax, ay float32, gid uint) {
+	acceleration[gid].x = ax
+	acceleration[gid].y = ay
 }
 
-func setHitbox(x, y int8, gid uint16) {
-	hitbox[gid*2] = x
-	hitbox[gid*2+1] = y
+//setHitbox sets the size of an AABB hitbox,
+//where pos is the top left corner and off is the bottom right corner.
+func setHitbox(offset vecFloat, size float32, gid uint) {
+	hitbox[gid].pos = offset //Set offset
+	hitbox[gid].size = size  //set size
 }
