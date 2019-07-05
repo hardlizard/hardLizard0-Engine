@@ -4,8 +4,35 @@ goActionAdventure is a prototype for an action adventure game written in golang 
 
 To run, execute `go run *.go` in the source directory.
 
-### Todo
+## Todo
 
+* Entities
+    - [x] Player
+    - [ ] Mob
+    - [ ] NPC
+    - [ ] Cursor
+    - [ ] Projectile
+    - [ ] Obj (No AI)
+* Components
+    - [x] Position
+    - [x] Velocity
+    - [x] Acceleration
+    - [ ] Z Position
+    - [ ] Health
+    - [ ] Collision Flag
+    - [ ] Physics Flag
+    - [ ] Free List
+* Systems
+    - [ ] Update Position
+    - [ ] Update Velocity
+    - [ ] Update Acceleration
+    - [ ] Update Z Position
+    - [ ] AABB Collision Detection
+    - [ ] Tile Floor Collision
+    - [ ] Tile Wall Collision
+    - [ ] Damage
+    - [ ] Heal
+    - [ ] Knockback
 #### Alpha
 * Map Engine
     - [x] JSON Map Loader
@@ -25,7 +52,7 @@ To run, execute `go run *.go` in the source directory.
     - [ ] Player Inventory
 * Animation Engine
     - [ ] Tiles
-    - [X] Sprites
+    - [x] Sprites
     - [ ] Items
 #### Beta
 * HUD

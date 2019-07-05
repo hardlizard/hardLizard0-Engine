@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/hajimehoshi/ebiten"
 )
 
@@ -31,9 +30,5 @@ func updateInputState() {
 	} else {
 		newInputState.right = false
 	}
-	fmt.Println(ebiten.IsKeyPressed(ebiten.KeyW))
-	fmt.Println(ebiten.IsKeyPressed(ebiten.KeyS))
-	fmt.Println(ebiten.IsKeyPressed(ebiten.KeyA))
-	fmt.Println(ebiten.IsKeyPressed(ebiten.KeyD))
 	currentInputState = newInputState
 }

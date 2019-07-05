@@ -7,8 +7,9 @@ import ()
 func updatePVA() {
 	updateVelocity()
 	updatePlayerVelocity()
-	updatePosition()
+
 	collision()
+	updatePosition()
 }
 
 //updatePosition updates the posisition array from the velocity array
