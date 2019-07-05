@@ -14,7 +14,7 @@ const windowHeight = 320
 const assetsDir = "assets"
 
 var gameMode = 0
-var currentInputState inputState
+var currentInputState inputState //TODO: Move to player singleton struct
 
 //position holds positions, ordered x, y, as pairs of entries in the array
 //var position [maxEntity * 2]float32
