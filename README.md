@@ -20,13 +20,13 @@ To run, execute `go run *.go` in the source directory.
 
 - Components
   - [ ] Player Singleton - The player singleton will contain one off information for the player entity.  
-  -[x] PVA
+  - [x] PVA
     - [x] Position
     - [x] Velocity
     - [x] Acceleration
   - [ ] Z Position - Game world height, used to determine render order and collision information
-  - [x] Hitbox - Currently AABB hitboxes are implemented. Consider adding circles or polygons.
-  - [ ] Health - Player/Mob/NPC health. Allows negative.
+  - [x] Hitbox - Circular Hitboxes.
+  - [x] Health - Player/Mob/NPC health. Allows negative.
   - [ ] Collision Flag - Ture if collidable object.
   - [ ] Physics Flag - True if object is movable.
   - [ ] Inventory - Flags and counters for items. Limit to player or allow NPCs to have inventory depending on game type.
