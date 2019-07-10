@@ -1,60 +1,55 @@
 package main
 
 import (
-	//	"encoding/json"
-	"fmt"
 	"github.com/hajimehoshi/ebiten"
-	//"github.com/hajimehoshi/ebiten/ebitenutil"
 	"image/color"
 	"log"
 )
 
-/////////////////////Globals//////////////////////////////////
+//Globals
 const windowTitle = "goAA"
-const scale = 1
-const windowWidth = 1024
-const windowHeight = 768
+const scale = 3
+const windowWidth = 480
+const windowHeight = 320
+const assetsDir = "assets"
 
 var gameMode = 0
+var currentInputState inputState //TODO: Move to player singleton struct
 
-//////////////////////////////////////////////////////////////
+//position holds positions, ordered x, y, as pairs of entries in the array
+//var position [maxEntity * 2]float32
 
 //update is the main loop of the ebiten engine. Core loop is here.
-func (state *gameState) update(screen *ebiten.Image) error {
+func update(screen *ebiten.Image) error {
 	//gameMode 0 initializes assets
-	if state.gameMode == 0 {
-		if err := state.initAssets(); err != nil {
-			log.Fatal(err)
-		}
-		state.gameMode = 1
+	if gameMode == -1 {
+		panic("Game Over")
 	}
+	if gameMode == 0 {
+		initAssets()
+		initPlayer()
+		newMob()
+		gameMode = 1
+	}
+
 	if ebiten.IsDrawingSkipped() {
 		return nil
 	}
 	//Do stuff goes here
-	screen.Fill(color.RGBA{255, 0, 0, 255})
-
-	globalCount(state)
-	state.player.movement()
-	renderHelper(state, screen)
-	state.drawSprite(screen)
+	//physics
+	updateInputState()
+	updatePVA()
+	//render
+	screen.Fill(color.RGBA{0, 128, 128, 255})
+	drawSprite(screen)
+	death()
+	//ebitenutil.DebugPrint(screen, out)
 	return nil
 }
 
 func main() {
-	var state gameState
-	err := state.initGameState()
-	if err != nil {
-		log.Fatal("failed to initialize game state. ")
-	}
-	if err := ebiten.Run(state.update, windowWidth, windowHeight, scale, windowTitle); err != nil {
+	if err := ebiten.Run(update, windowWidth, windowHeight, scale, windowTitle); err != nil {
 		log.Fatal(err)
-	}
-}
 
-func globalCount(state *gameState) {
-	if state.globalCounter < 0xffffffffffffffff {
-		state.globalCounter++
-		fmt.Println(state.globalCounter)
 	}
 }
