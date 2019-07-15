@@ -9,6 +9,10 @@ var position [maxEntity]vecFloat     //position holds the x, y coords of an enti
 var velocity [maxEntity]vecFloat     //velocity holds the velocity components, similarly to position
 var acceleration [maxEntity]vecFloat //acceleration holds... you get the idea
 
+var health [maxEntity]int
+var maxHealth [maxEntity]int
+var dead [maxEntity]bool
+
 //vecFloat holds a floating point vector in two dimensions.
 type vecFloat struct {
 	x float32
@@ -24,4 +28,20 @@ type vecInt struct {
 type circle struct {
 	pos  vecFloat
 	size float32
+}
+
+//setHealth sets the current health for an entity.
+func setHealth(currentHealth int, gid uint) {
+	health[gid] = currentHealth
+}
+
+//setMaxHealth sets the max health of an entity.
+func setMaxHealth(mh int, gid uint) {
+	maxHealth[gid] = mh
+}
+
+//initHealth initializes both health and max health.
+func initHealth(ch, mh int, gid uint) {
+	setHealth(ch, gid)
+	setMaxHealth(mh, gid)
 }
