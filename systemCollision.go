@@ -7,7 +7,7 @@ func collision() {
 	for i := 0; i < maxUsedEntity; i++ {
 		for j := i + 1; j < maxUsedEntity+1; j++ {
 			if collidableF[i] == true && collidableF[j] == true {
-				test, offset := collTest(hitbox[i], hitbox[j], position[i], position[j])
+				test, _ := collTest(hitbox[i], hitbox[j], position[i], position[j])
 				if test == true {
 					fmt.Println(health[0])
 					heal(1, 0)
@@ -31,6 +31,6 @@ func collTest(hb0, hb1 circle, pos0, pos1 vecFloat) (bool, float32) {
 	return false, 0
 }
 
-func push(pusherGID, pusheeGID uint)
+//func push(pusherGID, pusheeGID uint)
 
 //TODO: For tile collisions w/ sprites, remember that the offset is zero when the hitbox is centered on the top left sprite corner. Remember to account for this when writing tile collision code. spritesize/2 offset.
