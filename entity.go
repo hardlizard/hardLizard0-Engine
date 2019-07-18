@@ -7,6 +7,7 @@ func initPlayer() {
 	setVelocity(0.0, 0.0, gid)
 	setHitbox(vecFloat{0, 0}, 16, gid)
 	initHealth(1, 100, gid)
+	collidableF[gid] = true
 	//	setAcceleration(0.0, 0.0, gid)
 }
 
@@ -16,5 +17,7 @@ func newMob() {
 	setVelocity(0.0, 0.0, gid)
 	setHitbox(vecFloat{0, 0}, 16, gid)
 	initHealth(100, 100, gid)
+	collidableF[gid] = true
+	pushableF[gid] = true
 	maxUsedEntity++
 }

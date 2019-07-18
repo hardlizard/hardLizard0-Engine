@@ -20,6 +20,7 @@ var physicsF [maxEntity]bool    //Flag for physics engine.
 var invincibleF [maxEntity]bool //Flag for invincibility.
 var deadF [maxEntity]bool       //Flag when health goes below 0.
 var projectileF [maxEntity]bool //Flag when entity is a projectile, run projectile logic on collision.
+var pushableF [maxEntity]bool   //Flag when entity is pushable by the player.
 
 //Map Components
 
