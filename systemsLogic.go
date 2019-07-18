@@ -7,15 +7,15 @@ import "fmt"
 func death() {
 	for i := 0; i < maxEntity; i++ {
 		if health[i] <= 0 {
-			dead[i] = true
+			deadF[i] = true
 		}
 	}
-	if dead[0] == true {
+	if deadF[0] == true {
 		playerDeath()
 	}
 }
 
 func playerDeath() {
 	gameMode = -1
-	fmt.Println("player dead")
+	fmt.Println("player deadF")
 }

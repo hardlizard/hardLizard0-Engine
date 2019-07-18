@@ -11,7 +11,6 @@ To run, execute `go run *.go` in the source directory.
   - [x] Mob - Being damageable and damaging NPC.
   - [ ] NPC - Being movable, interactable sprite.
   - [ ] Cursor - For use in menus.
-  - [ ] Projectile - Moves using AI, damages on collision, despawns on collision.
   - [ ] Obj (No AI) - Boxes, Chests, Question Blocks, etc.
   - [ ] Items - Usable items that are held in inventory and selected for use.
   - [ ] Map - World Map, Dungeon, etc Maps.
@@ -24,13 +23,14 @@ To run, execute `go run *.go` in the source directory.
     - [x] Position
     - [x] Velocity
     - [x] Acceleration
-  - [ ] Z Position - Game world height, used to determine render order and collision information
+  - [x] Z Position - Game world height, used to determine render order and collision information
   - [x] Hitbox - Circular Hitboxes.
   - [x] Health - Player/Mob/NPC health. Allows negative.
-  - [ ] Collision Flag - Ture if collidable object.
-  - [ ] Physics Flag - True if object is movable.
+  - [x] Collision Flag - Ture if collidable object.
+  - [x] Physics Flag - True if object is movable.
+  - [x] Projectile Flag - Moves using AI, damages on collision, despawns on collision.
   - [ ] Inventory - Flags and counters for items. Limit to player or allow NPCs to have inventory depending on game type.
-  - [ ] Currency - Player only, for now. Possibly all entities depending on game type.
+  - [x] Currency - Player only, for now. Possibly all entities depending on game type.
   - [ ] VRAM
     - [ ] Tileset
     - [ ] Sprite Sheet
@@ -50,7 +50,7 @@ To run, execute `go run *.go` in the source directory.
   - [ ] Tile Floor Collision
   - [ ] Tile Wall Collision
   - [x] Damage
-  - [ ] Heal
+  - [x] Heal
   - [x] Death
   - [ ] Render Loop
     - [ ] Render Map (On Grid Single Entity)

@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten"
+
+	"fmt"
 )
 
 func updateInputState() {
@@ -29,6 +31,40 @@ func updateInputState() {
 		newInputState.right = true
 	} else {
 		newInputState.right = false
+	}
+	//circle button
+	if ebiten.IsKeyPressed(ebiten.KeyRight) {
+		newInputState.circle = true
+		fmt.Println("cirlce")
+	} else {
+		newInputState.circle = false
+	}
+	//triangle button
+	if ebiten.IsKeyPressed(ebiten.KeyUp) {
+		newInputState.triangle = true
+		fmt.Println("triangle")
+	} else {
+		newInputState.triangle = false
+	}
+	//square button
+	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+		newInputState.square = true
+		fmt.Println("square")
+	} else {
+		newInputState.square = false
+	}
+	//cross button
+	if ebiten.IsKeyPressed(ebiten.KeyDown) {
+		newInputState.cross = true
+		fmt.Println("cross")
+	} else {
+		newInputState.cross = false
+	}
+	//start button
+	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+		newInputState.square = true
+	} else {
+		newInputState.square = false
 	}
 	currentInputState = newInputState
 }

@@ -143,12 +143,14 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Keith's GD document template}
-\author{Your name, student number \\ Course code, Lecturer Title. Lecturer Initial, Surname}
+\title{hardLizard0 Engine}
+\author{John Emory,\\hardLizard Studios}
 \maketitle
 
 \begin{abstract}
-Summarize the entire document without any reference to specific bibliographies, images or tables only semi substantiated and focus on the intro, process and then conclusion. This should give enough information that the reader doesn't encounter anything surprising within the document but should NOT give any kind of information about the flow of the document which is left to the introduction. The abstract should be almost exactly this long.
+The hardLizard0 Engine is a Game Engine written in golang targeting lower end hardware with tile based games.
+The engine uses ebiten as a rendering backend.
+The engine implements an Entity-Component-Systems (ECS) framework to achieve better performance on lower end hardware.
 \end{abstract}
 
 
@@ -156,55 +158,89 @@ Summarize the entire document without any reference to specific bibliographies, 
 
 \section{Introduction}
 
-\IEEEPARstart{T}{he} introduction sets the scene for the rest of the document, building a context that allows you to continue without redressing the paradigm multiple times. One you've done that, write the rest of the document and come back here later to outline the way in which the document is formatted. Example: "Sections 2 discusses the original design goals, section 3 will introduce the implementation of the goals" etc.
+\IEEEPARstart{T}{he} hardLizard0 Engine uses an ECS framework to provide a framework for tile based games on lower end hardware.
+The Entity-Component-Systems (ECS) framework allows the engine to prioritize cache coherency in the CPU, avoiding cache misses. 
+The use of tiles and spritesheets for graphics minimizes graphics memory used while capturing a retro aesthetic.
+The rendering engine Ebiten is used to handle video output, player input, and audio.
+For the hardLizard0 engine, minimal custom tooling for designers is to be developed in order to prioritize engine development. 
+Tiled is the preferred level design tool.
 
-\hfill Put the date OF WRITING in here in the format: June 02, 2018
+\hfill July 13, 2019
 
 \section{Design}
 Explain what you are designing because at this point the reader doesn't know what you're talking about yet. Explain what you're making and how you intend to achieve it. Under every section heading you MUST say what subsections are contained within it, think of it as a baby introduction. Write the subheadings first tho.
 
+An ECS framework is an alternative approach to the usual object oriented programing (OOP) paradigm often used for game engines.
+Instead of creating and destroying objects that may be fragmented in memory, an ECS framework consists of Entities, Components and Systems.
+Entities are restricted to unique Global Identifiers (GIDs) and hold no state of their own. 
+Instead, a GID refers to the index of any of several arrays, called Components.
+A Component is an array that holds information that is common between entities.
+A System is a function that iterates over one or several Components, updating the global state that the Components constitute.
+
 \subsection{Inspirations}
+Drawing from the 16-bit aesthetic of the SNES, hardLizard0 aims to recapture this retro-aesthetic while simultaneously lifting some of the restrictions imposed by the state of the art in the 1990s.
+Even the most basic hardware still in use today is orders of magnitude more powerful than the early 1990s video game consoles.
+By lifting these restrictions, we can allow greater artistic breadth for game designers while retaining some of the architectural decisions that allowed that generation of games to be both performative and visually appealing.
+
 \subsection{Goals}
+The aim of the hardLizard0 engine is to provide a platform on which to build tile based games for modern, if lower powered, hardware.
+
 \subsection{Software Design}
-Use a flow diagram to explain how you intend for your design to be implemented programatically \ref{fig:FlowC}. This goes before aesthetic because your design (while you must substantiate it to yourself) need not be fully substantiated in this document while your aesthetic decisions must be substantiated. In this section you'll need to explain the overarching design, not small details which come later.
+The use of an ECS framework ensures the engine will be maximally performative on minimal hardware.
+A pitfall of OOP, though it may not be important in every program, is memory fragmentation.
+When creating and destroying objects in memory, one does not have memory cohesion between common fields between objects.
+Although an ECS framework increases design complexity of the engine, the potential performance gains, allowing less substantial hardware to run the engine, more than offsets the cost of complexity of design.
 
-\begin{figure}[h]
-   \centering
-   \includegraphics[scale=.45]{FlowChartForGinti.png}
-    \caption{Tower combination algorithm}
-    \label{fig:FlowC}
-\end{figure}
 
-\subsection{Aesthetic}
-If your game is Aesthetic heavy, then make this into an entirely new section. Aesthetic is visual, auditory and sensory but not narrative. Narrative goes into the DESIGN section above.
 
 \section{Mechanics}
-Explain the main mechanics here and how you intend to express them in the game as well as any challenges. Order them in order of importance but also be aware that some depend on other mechanics. For example, don't discuss level design before you explain that you're making a platformer with gravity controlled movement.
-\subsection{Rounds}
-If you have something that needs to be broken up into parts, then you can break it up into subsubsections. If you do this, then the subsection acts as an introduction and contains minimal information except to introduce the concept that the subsubs will explain.
-\subsubsection*{Phase 1}
-\subsubsection*{Phase 2}
-\subsubsection*{Phase 3}
+The hardLizard0 Engine aims to be a versatile engine that allows a game designer to realize a vision of a tile based game, irrespective of genera.
+Included target generas are:
+\begin{itemize}
+  \item Platformer
+  \item Metroidvania
+  \item ActionAdventure
+  \item Shoot'em-up
+  \item Puzzle
+\end{itemize}
 
-\subsection{New mechanic name}
+The engine will be flexible enough to accommodate toggling gravity and different layer collisions.
+A companion program for compiling json levels and png tilesheets and spritesheets into go files to be compiled into the final binary.
+This will simplify deployment of binaries for various platforms.
 
 \subsection{Level design}
-The level design subsection is a safe way to introduce images of the game to show off your assets and any kind of metrics that you're setting up. Clearly define the challenges that you'll give the player, the emergent mechanics and how you intend to avoid game breaking
+For the preliminary version of the hardLizard Engine, the Tiled **insert link** map editor will be the prefered level editor.
+The level compiler will accept world JSON files created by Tiled, supporting the following feature:
+\begin{itemize}
+  \item maps
+  \item layers
+  \item layer offsets
+  \item tilesheets
+  \item spritesheets
+  \item animated tiles
+  \item spawn points
+  \item hitboxes
+  \item map transitions 
+\end{itemize}
 
 \section{Development}
-Here you divide the mechanics that you mentioned above and explain how they will be developed. 
+Initial work on a Tiled JSON loader has been completed.
+For better performance, a custom tool to compile JSON into a go file will be needed.
+Many Components have already been implemented. An ongoing list of features is maintained at https://github.com/hardLizard/hardLizard0.
 
 \section{Pipeline}
 Explain how the subs from DEVELOPMENT will be integrated, not how you'll code them but how you'll tie them in and the order in which you'll do them.
 
 \section{Asset Development}
-Same as pipeline but for assets and how you'll tie the game together with your aesthetic.
+A common set of menu borders and rendered text should be provided for game designers to use, unifying a system aesthetic.
 
 \section{Analysis}
-Be critical of your work and what you could have done differently and what you will be doing differently. You can include other things here like external issues such as group communication or roles.
+Future versions of the engine should include support for simple 3D-graphics. 
+Moving variables out of global variables while still avoiding heap allocation, or chosing a different language for development would be good to simplify retooling the main engine to fit a given project.
 
 \section{Conclusion}
-Think of this as a much more substantive abstract. Tie your previous points together. "The careful design of the aesthetic connects the player to the environment and it is implemented in such a way as to enhance the mechanic." A statement like this can only be made if you have shown that you carefully designed the aesthetic and that it somehow connected the player to the environment (a point which would have had to be substantiated earlier and not in the conclusion) and then you would have had to have mentioned how it is that your implementation contributed to the mechanic which similarly to the earlier point must be substantiated within the document but not here. You also should not reference any images, bib items or arbitrary points that were not conclusive. Don't make throwaway comments here, anything mentioned must be something that you already concluded earlier in the document.
 
 You should also learn how to do references and use literature to substantiate decisions as well as literature that challenges your decisions.
+
+DRAFT DRAFT DRAFT DRAFTDRAFT DRAFTDRAFT DRAFTDRAFT DRAFT
 \end{document}

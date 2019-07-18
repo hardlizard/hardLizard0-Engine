@@ -64,8 +64,7 @@ func setAcceleration(ax, ay float32, gid uint) {
 	acceleration[gid].y = ay
 }
 
-//setHitbox sets the size of an AABB hitbox,
-//where pos is the top left corner and off is the bottom right corner.
+//setHitbox sets the size of a circular hitbox,
 func setHitbox(offset vecFloat, size float32, gid uint) {
 	hitbox[gid].pos = offset //Set offset
 	hitbox[gid].size = size  //set size
