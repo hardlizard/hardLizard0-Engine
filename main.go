@@ -13,6 +13,7 @@ const windowWidth = 480
 const windowHeight = 320
 const assetsDir = "assets"
 
+var game gameState
 var gameMode = 0
 var currentInputState inputState //TODO: Move to player singleton struct
 

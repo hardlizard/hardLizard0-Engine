@@ -15,8 +15,8 @@ func updatePVA() {
 //updatePosition updates the posisition array from the velocity array
 func updatePosition() {
 	for i := 0; i < maxUsedEntity+1; i++ {
-		position[i].x += velocity[i].x
-		position[i].y += velocity[i].y
+		game.position[i].x += game.velocity[i].x
+		game.position[i].y += game.velocity[i].y
 	}
 }
 
@@ -24,8 +24,8 @@ func updatePosition() {
 func updateVelocity() {
 	for i := 0; i < maxUsedEntity+1; i++ {
 
-		velocity[i].x += acceleration[i].x
-		velocity[i].y += acceleration[i].y
+		game.velocity[i].x += game.acceleration[i].x
+		game.velocity[i].y += game.acceleration[i].y
 
 	}
 }
@@ -33,39 +33,39 @@ func updateVelocity() {
 //updatePlayerVelocity updates the player position based on current input
 func updatePlayerVelocity() {
 	if currentInputState.left == true {
-		velocity[0].x = -1
+		game.velocity[0].x = -1
 	} else if currentInputState.right == true {
-		velocity[0].x = 1
+		game.velocity[0].x = 1
 	} else {
-		velocity[0].x = 0
+		game.velocity[0].x = 0
 	}
 	if currentInputState.up == true {
-		velocity[0].y = -1
+		game.velocity[0].y = -1
 	} else if currentInputState.down == true {
-		velocity[0].y = 1
+		game.velocity[0].y = 1
 	} else {
-		velocity[0].y = 0
+		game.velocity[0].y = 0
 	}
 }
 
 //sets are used to init PVA values.
 func setPosition(x, y float32, gid uint) {
-	position[gid].x = x
-	position[gid].y = y
+	game.position[gid].x = x
+	game.position[gid].y = y
 }
 
 func setVelocity(vx, vy float32, gid uint) {
-	velocity[gid].x = vx
-	velocity[gid].y = vy
+	game.velocity[gid].x = vx
+	game.velocity[gid].y = vy
 }
 
 func setAcceleration(ax, ay float32, gid uint) {
-	acceleration[gid].x = ax
-	acceleration[gid].y = ay
+	game.acceleration[gid].x = ax
+	game.acceleration[gid].y = ay
 }
 
 //setHitbox sets the size of a circular hitbox,
 func setHitbox(offset vecFloat, size float32, gid uint) {
-	hitbox[gid].pos = offset //Set offset
-	hitbox[gid].size = size  //set size
+	game.hitbox[gid].pos = offset //Set offset
+	game.hitbox[gid].size = size  //set size
 }

@@ -6,11 +6,11 @@ import "fmt"
 //health is 0 or negative, killing that entity if so.
 func death() {
 	for i := 0; i < maxEntity; i++ {
-		if health[i] <= 0 {
-			deadF[i] = true
+		if game.health[i] <= 0 {
+			game.deadF[i] = true
 		}
 	}
-	if deadF[0] == true {
+	if game.deadF[0] == true {
 		playerDeath()
 	}
 }
