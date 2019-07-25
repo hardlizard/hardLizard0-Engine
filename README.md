@@ -1,7 +1,8 @@
-# goActionAdventure
+# hardLizard0 Engine
 
-goActionAdventure is a prototype for an action adventure game written in golang using hajimehoshi/ebiten as a backend. Once working, the codebase is intended to be reworked into a generic 2D tile engine.
+The hardLizard0 engine is a tile based game engine written in golang using hajimehoshi/ebiten as a backend and an Entity-Components-Systems (ECS) framework.
 
+This is a <a href = "https://hardlizard.games"> hardLizard Studios</a> project.
 To run, execute `go run *.go` in the source directory.
 
 ## Todo

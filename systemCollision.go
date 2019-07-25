@@ -6,10 +6,11 @@ import "fmt"
 func collision() {
 	for i := 0; i < maxUsedEntity; i++ {
 		for j := i + 1; j < maxUsedEntity+1; j++ {
-			if collidableF[i] == true && collidableF[j] == true {
-				test, _ := collTest(hitbox[i], hitbox[j], position[i], position[j])
+			if game.collidableF[i] == true && game.collidableF[j] == true {
+				test, _ := collTest(game.hitbox[i], game.hitbox[j], game.position[i], game.position[j])
+				fmt.Println(game.health[0])
 				if test == true {
-					fmt.Println(health[0])
+					fmt.Println(game.health[0])
 					heal(1, 0)
 				}
 			}
