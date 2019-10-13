@@ -10,12 +10,27 @@ func collision() {
 				test, _ := collTest(game.hitbox[i], game.hitbox[j], game.position[i], game.position[j])
 				fmt.Println(game.health[0])
 				if test == true {
-					fmt.Println(game.health[0])
+					//fmt.Println(game.health[0])
 					heal(1, 0)
+				}
+				if tileCollision(game.hitbox[i]) == true {
+					fmt.Println("collision")
+					game.position[i].y = float32(int(game.position[i].y)) //hacky, replace with sane function to set y position, add setting x position, too.
 				}
 			}
 		}
 	}
+}
+
+//tileCollision checks collision of sprites with tiles, and moves the sprites if needed.
+func tileCollision(hb circle) bool {
+	collidables := []int8{1}
+	for _, value := range collidables {
+		if levelMap[int(hb.pos.x)+int(hb.pos.y)*16] == value {
+			return true
+		}
+	}
+	return false
 }
 
 //collTest is a collision test for the main collision function.

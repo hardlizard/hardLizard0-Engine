@@ -6,7 +6,7 @@ import ()
 //updatePVA updates position and velocity arrays from the acceration array.
 func updatePVA() {
 	updateVelocity()
-	updatePlayerVelocity()
+	movePlayer()
 
 	collision()
 	updatePosition()
@@ -15,8 +15,8 @@ func updatePVA() {
 //updatePosition updates the posisition array from the velocity array
 func updatePosition() {
 	for i := 0; i < maxUsedEntity+1; i++ {
-		game.position[i].x += game.velocity[i].x
-		game.position[i].y += game.velocity[i].y
+		game.position[i].x += game.velocity[i].x + game.acceleration[i].x/2
+		game.position[i].y += game.velocity[i].y + game.acceleration[i].x/2 + 2
 	}
 }
 
@@ -25,13 +25,13 @@ func updateVelocity() {
 	for i := 0; i < maxUsedEntity+1; i++ {
 
 		game.velocity[i].x += game.acceleration[i].x
-		game.velocity[i].y += game.acceleration[i].y
+		game.velocity[i].y += game.acceleration[i].y + 2
 
 	}
 }
 
-//updatePlayerVelocity updates the player position based on current input
-func updatePlayerVelocity() {
+//movePlayer updates the player position based on current input
+func movePlayer() {
 	if currentInputState.left == true {
 		game.velocity[0].x = -1
 	} else if currentInputState.right == true {
@@ -45,6 +45,13 @@ func updatePlayerVelocity() {
 		game.velocity[0].y = 1
 	} else {
 		game.velocity[0].y = 0
+	}
+}
+
+//gravity implements gravity
+func gravity() {
+	for i := 0; i < maxUsedEntity; i++ {
+
 	}
 }
 

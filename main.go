@@ -30,6 +30,7 @@ func update(screen *ebiten.Image) error {
 		initAssets()
 		initPlayer()
 		newMob()
+		populateVRAM()
 		gameMode = 1
 	}
 
@@ -42,6 +43,7 @@ func update(screen *ebiten.Image) error {
 	updatePVA()
 	//render
 	screen.Fill(color.RGBA{0, 128, 128, 255})
+	drawLevel(screen)
 	drawSprite(screen)
 	death()
 	//ebitenutil.DebugPrint(screen, out)

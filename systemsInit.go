@@ -13,10 +13,10 @@ func initAssets() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	VRAM[0] = img
+	SpriteRAM[0] = img
 	img2, _, err := ebitenutil.NewImageFromFile("assets/goBowl.png", ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	VRAM[1] = img2
+	SpriteRAM[1] = img2
 }
